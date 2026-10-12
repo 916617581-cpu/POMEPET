@@ -24,3 +24,5 @@
 .ui-pet-edit-link{font-weight:700}
 .ui-today .ui-header::before{content:"";position:absolute;inset:0 -25px;z-index:-1;background:#efede3;pointer-events:none}
 
+@media(max-width:600px){html,body{width:100%;overflow-x:clip;background:#efede3}#app:has(.ui-canvas),#app:has(.onb-canvas){width:100%;max-width:none;border-radius:0;box-shadow:none;padding-top:env(safe-area-inset-top,0px)}.ui-today .ui-status{top:env(safe-area-inset-top,0px)}.ui-today .ui-header{top:calc(62px + env(safe-area-inset-top,0px))}.ui-today .ui-record-toolbar{top:calc(123px + env(safe-area-inset-top,0px))}.ui-canvas{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}}
+
