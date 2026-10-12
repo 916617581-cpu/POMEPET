@@ -16,6 +16,7 @@ export function checklist(chosen=[],category='日常护理',custom=[],kind='猫�
  const items=[...groups[category],...custom.filter(x=>x.category===category).map(x=>x.name)];
  return `<section class="onb-canvas onb-checklist">${chrome('它的照护清单','petform')}<p class="onb-intro">选一些常用事项，以后可以随时调整</p><div class="onb-categories" role="group" aria-label="照护类别">${Object.keys(groups).map(c=>`<button type="button" data-care-category="${c}" class="${c===category?'selected':''}">${asset(c===category?3129:3130,0,0)}<span>${c}</span></button>`).join('')}</div><form id="checklist"><div class="onb-care-card ${items.length>7?'onb-care-scroll':''}">${asset(3132,0,0)}<div class="onb-care-rows">${items.map((item,i)=>`${i?asset(3133,0,62+58*(i-1)):''}<label class="onb-care-row" style="top:${i<6?29+56*i:373+56*(i-6)}px"><input name="chosen" value="${escape(item)}" type="checkbox" ${chosen.includes(item)?'checked':''}><img class="onb-check-image" src="${root}1667-${chosen.includes(item)?3158:3147}.svg" alt=""><span>${escape(item)}</span></label>`).join('')}</div></div><button id="customCare" class="onb-custom" type="button">＋ 添加自定义事项</button>${button('开始记录',3139,706,'type="submit"')}</form></section>`;
 }
-export function scaleOnboarding(){const canvas=document.querySelector('.onb-canvas');if(canvas)canvas.style.zoom=Math.min(1,window.innerWidth/402);}
+export function scaleOnboarding(){const canvas=document.querySelector('.onb-canvas');if(canvas){const factor=window.innerWidth<=600?window.innerWidth/402:1;canvas.style.zoom=factor;document.documentElement.style.setProperty('--ui-scale',factor);}}
+
 
 
