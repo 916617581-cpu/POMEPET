@@ -1,0 +1,11 @@
+node_modules/
+qa/
+release.tar.gz
+.sites/
+.openai/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+POMEPET-backup-*.json
