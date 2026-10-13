@@ -66,3 +66,9 @@
 .ld-trend-tabs>.ui-surface,.ld-trend-tabs>button>.ui-surface{display:none}
 .ld-trend-tabs>button{flex:1;width:auto;height:100%;border-radius:0}
 .ld-trend-tabs>button.active{background:#a8dcee}
+
+/* Keep the chosen month next to its label on the bill list. */
+.ld-list-month{justify-content:flex-start;gap:12px}
+.ld-list-month input{width:160px;min-width:0;text-align:left;text-align-last:left;padding:0;margin:0}
+.ld-list-month input::-webkit-date-and-time-value{text-align:left;margin:0}
+.ld-list-month input::-webkit-datetime-edit{padding:0;text-align:left}
