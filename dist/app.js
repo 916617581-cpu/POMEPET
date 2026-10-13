@@ -1,12 +1,12 @@
 import {renderAlbum,bindAlbum} from './growth-album.js';
 import {todayShanghai,companionDays} from './pet-profile.js';
 import {bindDatePickers} from './date-picker.js';
-import {bindPetMenus,bindBreedAndAvatar,customCareDialog} from './pet-ui.js';
+import {bindPetMenus,bindBreedAndAvatar,customCareDialog} from './pet-ui.js?v=20261013';
 import {petPhotoDialog,fitProfilePhoto} from './pet-photo.js';
 import {renderLedgerPage,bindLedger} from './ledger.js';
 import {withLedger,validateLedger} from './ledger-model.js';
 import {login,welcome,petform,checklist,scaleOnboarding} from './onboarding.js';
-import {renderScreen,scaleScreens} from './screens.js';
+import {renderScreen,scaleScreens} from './screens.js?v=20261013';
 import {renderRecordPage} from './record-pages.js';
 import {demoState} from './demo.js';
 import {activities,fresh,finishTask,nextTime,nextTaskTime,deletePet,restorePet} from './model.js';
@@ -146,4 +146,3 @@ function startNewPet(){if(dirty&&!confirm('有未保存的内容，确定放弃�
 let companionDate=todayShanghai();setInterval(()=>{const day=todayShanghai();if(day!==companionDate){companionDate=day;if(page==='profile'&&!dirty)render();}},60000);
 
 let floatingScrollTimer;window.addEventListener('scroll',()=>{const button=document.querySelector('.ui-floating-add');if(!button)return;button.classList.add('is-scrolling');clearTimeout(floatingScrollTimer);floatingScrollTimer=setTimeout(()=>{if(button.isConnected)button.classList.remove('is-scrolling');},800);},{passive:true});
-
