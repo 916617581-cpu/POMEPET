@@ -6,7 +6,8 @@
   outline-offset:-2px;
 }
 .onb-input:focus-within{outline:none;box-shadow:none}
-.onb-input:focus-within:after{content:'';position:absolute;inset:0;border:2px solid #78afbd;border-radius:16px;pointer-events:none;z-index:5}
+.onb-input:focus-within:after{content:none}
+.onb-input:focus-within>img[data-figma-asset="1667:3965"]{content:url("./assets/onboarding/1667-3965-focus.svg")}
 .onb-input :is(input,select):focus,
 .onb-input :is(input,select):focus-visible,
 :is(.ui-canvas,.onb-canvas) :is(.pet-native-select,.dt-native):focus,
