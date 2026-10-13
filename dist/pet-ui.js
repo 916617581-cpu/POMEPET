@@ -6,15 +6,29 @@ export function bindPetMenus(state,onAddPet){
   if(select.disabled)return;const anchor=select.parentElement,canvas=select.closest('.ui-canvas')||document.querySelector('#app');if(!canvas)return;if(getComputedStyle(anchor).position==='static')anchor.style.position='relative';
   select.classList.add('pet-native-select');select.tabIndex=-1;select.setAttribute('aria-hidden','true');
   const trigger=document.createElement('button');trigger.type='button';trigger.className='pet-menu-trigger';trigger.setAttribute('aria-label',select.getAttribute('aria-label')||'选择宠物');trigger.setAttribute('aria-haspopup','menu');trigger.setAttribute('aria-expanded','false');anchor.append(trigger);
+  if(anchor.closest('.ld-bill-fields')){select.classList.add('pet-value-hidden');trigger.classList.add('pet-value-trigger');const value=document.createElement('span');value.className='pet-value-label';trigger.append(value);const update=()=>value.textContent=select.selectedOptions[0]?.textContent||'请选择';select.addEventListener('change',update);update();}
   trigger.onclick=e=>{e.preventDefault();document.querySelector('.pet-switch-menu')?.remove();const abort=new AbortController();const menu=document.createElement('div');menu.className='pet-switch-menu';menu.setAttribute('role','menu');menu.setAttribute('aria-label','切换宠物');
    const entries=[...select.options].filter(o=>o.value),pets=entries.filter(o=>o.value!=='all'&&o.value!=='public'),foot=entries.filter(o=>o.value==='all'||o.value==='public');
    const entry=(o,footer=false)=>{const p=state.pets.find(p=>p.id===o.value),selected=select.value===o.value;let img=p?.avatar?'<img class="pet-menu-user" src="'+E(p.avatar)+'" alt="">':p?.avatarAsset?'<img class="pet-menu-face pet-menu-special" src="./assets/screens/'+p.avatarAsset.replace(':','-')+'.svg" alt="">':p?.kind==='狗狗'?'<img class="pet-menu-face pet-menu-dog" src="./assets/dog/1700-1951.svg" alt="">':p?'<img class="pet-menu-face pet-menu-cat" src="./assets/ledger/1690-656.svg" alt="">':art('1876','pet-menu-paw');return '<button type="button" role="menuitemradio" aria-checked="'+selected+'" data-select-pet="'+E(o.value)+'" class="pet-menu-entry '+(selected?'selected ':'')+(footer?'pet-menu-footer':'')+'">'+(selected?art('1631','pet-menu-selected'):'')+'<span class="pet-menu-avatar">'+art(footer?'1649':'1632','pet-menu-circle')+img+'</span><span class="pet-menu-name">'+E(o.value==='all'?'全部宠物':o.textContent)+'</span>'+(selected?art('1854','pet-menu-check'):'')+'</button>';};
    menu.innerHTML+=pets.map(o=>entry(o)).join('')+foot.map(o=>entry(o,true)).join('')+'<button type="button" role="menuitem" class="pet-menu-add">＋ 添加宠物</button>';canvas.append(menu);
-   const zoom=canvas.getBoundingClientRect().width/canvas.offsetWidth,a=anchor.getBoundingClientRect(),r=canvas.getBoundingClientRect();menu.style.left=Math.max(8,Math.min(224,(a.right-r.left)/zoom-170+1))+'px';menu.style.top=(a.bottom-r.top)/zoom+6+'px';
+   const zoom=canvas.getBoundingClientRect().width/canvas.offsetWidth,a=anchor.getBoundingClientRect(),r=canvas.getBoundingClientRect();menu.style.left=Math.max(8,Math.min(canvas.offsetWidth-menu.offsetWidth-8,(a.right-r.left)/zoom-menu.offsetWidth))+'px';menu.style.top=(a.bottom-r.top)/zoom+6+'px';
    trigger.setAttribute('aria-expanded','true');const close=()=>{abort.abort();menu.remove();trigger.setAttribute('aria-expanded','false');};
    menu.querySelector('.pet-menu-add').onclick=()=>{close();onAddPet?.();};
    menu.querySelectorAll('[data-select-pet]').forEach(b=>b.onclick=()=>{select.value=b.dataset.selectPet;close();select.dispatchEvent(new Event('change',{bubbles:true}));trigger.focus();});
    document.addEventListener('pointerdown',ev=>{if(!menu.contains(ev.target)&&!trigger.contains(ev.target))close();},{signal:abort.signal});document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){close();trigger.focus();}},{signal:abort.signal});menu.querySelector('[aria-checked=true]')?.focus();
+  };
+ });
+ bindPetEditorChoices();
+}
+function bindPetEditorChoices(){
+ document.querySelectorAll('#petEditForm select').forEach(select=>{
+  const field=select.closest('.pet-edit-field');select.hidden=true;
+  const trigger=document.createElement('button');trigger.type='button';trigger.className='pet-edit-choice';trigger.setAttribute('aria-label',select.getAttribute('aria-label'));trigger.setAttribute('aria-haspopup','menu');trigger.setAttribute('aria-expanded','false');
+  const value=document.createElement('span');trigger.append(value);field.append(trigger);const update=()=>value.textContent=select.selectedOptions[0]?.textContent||'';update();select.addEventListener('change',update);
+  trigger.onclick=e=>{e.preventDefault();document.querySelector('.pet-choice-menu')?.remove();const menu=document.createElement('div');menu.className='pet-choice-menu';menu.setAttribute('role','menu');menu.setAttribute('aria-label',select.getAttribute('aria-label'));const abort=new AbortController();
+   const close=()=>{abort.abort();menu.remove();trigger.setAttribute('aria-expanded','false');};
+   for(const option of select.options){const button=document.createElement('button');button.type='button';button.setAttribute('role','menuitemradio');button.setAttribute('aria-checked',String(option.selected));button.textContent=option.textContent;button.onclick=()=>{select.value=option.value;select.dispatchEvent(new Event('change',{bubbles:true}));close();trigger.focus();};menu.append(button);}
+   field.append(menu);trigger.setAttribute('aria-expanded','true');document.addEventListener('pointerdown',ev=>{if(!field.contains(ev.target))close();},{signal:abort.signal});document.addEventListener('keydown',ev=>{if(ev.key==='Escape'){close();trigger.focus();}if(ev.key==='ArrowDown'||ev.key==='ArrowUp'){const choices=[...menu.querySelectorAll('button')],index=choices.indexOf(document.activeElement);ev.preventDefault();choices[(index+(ev.key==='ArrowDown'?1:-1)+choices.length)%choices.length].focus();}},{signal:abort.signal});menu.querySelector('[aria-checked=true]')?.focus();
   };
  });
 }
