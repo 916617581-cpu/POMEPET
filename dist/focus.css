@@ -72,3 +72,7 @@
 .ld-list-month input{width:160px;min-width:0;text-align:left;text-align-last:left;padding:0;margin:0}
 .ld-list-month input::-webkit-date-and-time-value{text-align:left;margin:0}
 .ld-list-month input::-webkit-datetime-edit{padding:0;text-align:left}
+
+/* Use an explicit 8px space without extra line-height around profile copy. */
+.ui-profile-content .ui-profile-row>span,.ui-profile-content .ui-album-card{gap:8px}
+.ui-profile-content .ui-profile-row>span>strong,.ui-profile-content .ui-profile-row>span>small,.ui-profile-content .ui-album-card>strong,.ui-profile-content .ui-album-card>small{line-height:1;margin:0}
