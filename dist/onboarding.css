@@ -16,3 +16,8 @@
 
 
 .onb-login-link{display:flex;align-items:center;justify-content:center;text-decoration:none}.onb-guest{position:absolute;left:25px;top:755px;width:353px;height:44px;color:#716c5e;background:transparent!important;font-size:13px}.onb-login-note{position:absolute;left:20px;top:816px;width:362px;text-align:center;font-size:11px;line-height:17px;color:#716c5e}.onb-login-link:focus-visible,.onb-guest:focus-visible{outline:3px solid #93bec8;outline-offset:4px}
+
+/* Keep the focus ring on the exported field surface, including on iOS. */
+.onb-field{width:354px}
+.onb-input:focus-within{outline:none;box-shadow:inset 0 0 0 2px #93bec8;border-radius:16px}
+.onb-input input:focus,.onb-input select:focus{outline:none;outline-offset:0}
