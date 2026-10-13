@@ -1,0 +1,43 @@
+/* Focus follows the visible control boundary instead of expanding outside it. */
+:is(.ui-canvas,.onb-canvas) :is(button,input,select,textarea):focus-visible,
+.ui-menu-row:focus-visible,.album-photo:focus-visible,
+:is(.custom-care-dialog,.dt-sheet) :is(button,input,select):focus-visible {
+  outline:2px solid #78afbd;
+  outline-offset:-2px;
+}
+.onb-input:focus-within{outline:none;box-shadow:none}
+.onb-input:focus-within:after{content:'';position:absolute;inset:0;border:2px solid #78afbd;border-radius:16px;pointer-events:none;z-index:5}
+.onb-input :is(input,select):focus,
+.onb-input :is(input,select):focus-visible,
+:is(.ui-canvas,.onb-canvas) :is(.pet-native-select,.dt-native):focus,
+:is(.ui-canvas,.onb-canvas) :is(input[type=radio],input[type=checkbox]):focus {
+  outline:none;
+}
+.onb-kinds label:has(input:focus-visible),
+.onb-care-row:has(input:focus-visible),
+.ld-categories label:has(input:focus-visible){outline:2px solid #78afbd;outline-offset:-2px}
+:is(.pet-edit-field,.ld-amount,.ld-bill-fields>label,.ld-note,
+.ui-schedule-date,.ui-days-row,.ui-schedule-note,.ui-product-row,
+.ui-complete-datetime label,.ui-complete-note,.rec-datetime label,
+.rec-food-row,.rec-note,.rec-weight-entry):has(:is(input,select,textarea):focus-visible) {
+  outline:2px solid #78afbd;outline-offset:-2px;border-radius:16px;
+}
+:is(.pet-edit-field,.ld-amount,.ld-bill-fields>label,.ld-note,
+.ui-schedule-date,.ui-days-row,.ui-schedule-note,.ui-product-row,
+.ui-complete-datetime label,.ui-complete-note,.rec-datetime label,
+.rec-food-row,.rec-note,.rec-weight-entry) :is(input,select,textarea):focus,
+:is(.pet-edit-field,.ld-amount,.ld-bill-fields>label,.ld-note,
+.ui-schedule-date,.ui-days-row,.ui-schedule-note,.ui-product-row,
+.ui-complete-datetime label,.ui-complete-note,.rec-datetime label,
+.rec-food-row,.rec-note,.rec-weight-entry) :is(input,select,textarea):focus-visible{outline:none}
+.pet-edit-field:has(:is(input,select,textarea):focus-visible){border-radius:20px}
+:is(.ui-notify-row,.ld-toggle-row,.rec-toggle-row):has(input:focus-visible) .ui-toggle,
+.ui-repeat-group label:has(input:focus-visible) span{outline:2px solid #78afbd;outline-offset:-2px}
+.ui-system-notify input:focus-visible,.pet-edit-field input[type=checkbox]:focus-visible{outline:2px solid #78afbd;outline-offset:-2px}
+.ui-profile-upload:focus-within{outline-offset:-2px}
+.ui-pet-swipe:has(.ui-mine-pet:focus-visible){outline:none}
+.ld-bill-fields .pet-menu-trigger,.ld-bill-fields .dt-trigger{border-radius:12px}
+.onb-input .dt-trigger{border-radius:16px}
+.pet-menu-trigger,.pet-edit-choice{border-radius:inherit}
+.pet-edit-choice:focus-visible{outline:none}
+.pet-edit-field:has(.pet-edit-choice:focus-visible){outline:2px solid #78afbd;outline-offset:-2px}
